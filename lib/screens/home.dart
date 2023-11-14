@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:grimorio/controller/book_controller.dart';
+import 'package:grimorio/screens/components/cover_dialog.dart';
 
 import '../../theme.dart';
 import '../models/personal_book.dart';
@@ -98,6 +99,13 @@ class _FilledHomeState extends State<_FilledHome> {
                   crossAxisSpacing: 16,
                 ),
                 itemBuilder: (context, index) => InkWell(
+                  onLongPress: () {
+                    showCoverDialog(
+                      context: context,
+                      urlImage: widget
+                          .listPersonalBook[index].googleBook.thumbnailLink,
+                    );
+                  },
                   onTap: () {
                     Navigator.push(
                       context,
