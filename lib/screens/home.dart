@@ -104,6 +104,7 @@ class _FilledHomeState extends State<_FilledHome> {
                       context: context,
                       urlImage: widget
                           .listPersonalBook[index].googleBook.thumbnailLink,
+                      title: widget.listPersonalBook[index].googleBook.title,
                     );
                   },
                   onTap: () {
