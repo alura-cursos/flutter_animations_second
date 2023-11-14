@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:grimorio/controller/book_controller.dart';
+import 'package:grimorio/helpers/sine_curve.dart';
 
 import '../../theme.dart';
 import '../models/personal_book.dart';
@@ -103,7 +104,7 @@ class _FilledHomeState extends State<_FilledHome> {
                           begin: 0,
                           end: widget.listPersonalBook[index].rotation),
                       duration: const Duration(milliseconds: 500),
-                      curve: const SawTooth(50),
+                      curve: const SineCurve(),
                       builder: (context, value, child) {
                         return InkWell(
                           onTapDown: (details) {
