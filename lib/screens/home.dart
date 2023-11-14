@@ -91,43 +91,56 @@ class _FilledHomeState extends State<_FilledHome> {
                 ),
               ),
               SliverGrid.builder(
-                itemCount: widget.listPersonalBook.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisExtent: 167,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                ),
-                itemBuilder: (context, index) => InkWell(
-                  onLongPress: () {
-                    showCoverDialog(
-                      context: context,
-                      urlImage: widget
-                          .listPersonalBook[index].googleBook.thumbnailLink,
-                      title: widget.listPersonalBook[index].googleBook.title,
-                    );
-                  },
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookDetails(
-                          personalBook: widget.listPersonalBook[index],
-                        ),
-                      ),
-                    ).then((value) async {
-                      widget.listPersonalBook = await bookController.getBooks();
-                      setState(() {});
-                    });
-                  },
-                  child: Image.network(
-                    widget.listPersonalBook[index].googleBook.thumbnailLink,
-                    height: 220,
-                    width: 144,
-                    fit: BoxFit.cover,
+                  itemCount: widget.listPersonalBook.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisExtent: 167,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
                   ),
-                ),
-              ),
+                  itemBuilder: (context, index) {
+                    return TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0, end: 0.1),
+                      duration: const Duration(milliseconds: 5000),
+                      builder: (context, value, child) {
+                        return InkWell(
+                          onLongPress: () {
+                            showCoverDialog(
+                              context: context,
+                              urlImage: widget.listPersonalBook[index]
+                                  .googleBook.thumbnailLink,
+                              title: widget
+                                  .listPersonalBook[index].googleBook.title,
+                            );
+                          },
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookDetails(
+                                  personalBook: widget.listPersonalBook[index],
+                                ),
+                              ),
+                            ).then((value) async {
+                              widget.listPersonalBook =
+                                  await bookController.getBooks();
+                              setState(() {});
+                            });
+                          },
+                          child: Transform.rotate(
+                            angle: value,
+                            child: Image.network(
+                              widget.listPersonalBook[index].googleBook
+                                  .thumbnailLink,
+                              height: 220,
+                              width: 144,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }),
             ],
           ),
         ),
