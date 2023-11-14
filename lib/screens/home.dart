@@ -106,10 +106,12 @@ class _FilledHomeState extends State<_FilledHome> {
                       duration: const Duration(milliseconds: 500),
                       builder: (context, value, child) {
                         return InkWell(
-                          onLongPress: () {
+                          onTapDown: (details) {
                             setState(() {
                               widget.listPersonalBook[index].rotation = 0.1;
                             });
+                          },
+                          onLongPress: () {
                             showCoverDialog(
                               context: context,
                               urlImage: widget.listPersonalBook[index]
