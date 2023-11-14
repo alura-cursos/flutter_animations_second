@@ -100,11 +100,16 @@ class _FilledHomeState extends State<_FilledHome> {
                   ),
                   itemBuilder: (context, index) {
                     return TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0, end: 0.1),
-                      duration: const Duration(milliseconds: 5000),
+                      tween: Tween(
+                          begin: 0,
+                          end: widget.listPersonalBook[index].rotation),
+                      duration: const Duration(milliseconds: 500),
                       builder: (context, value, child) {
                         return InkWell(
                           onLongPress: () {
+                            setState(() {
+                              widget.listPersonalBook[index].rotation = 0.1;
+                            });
                             showCoverDialog(
                               context: context,
                               urlImage: widget.listPersonalBook[index]
