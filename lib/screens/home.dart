@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:grimorio/controller/book_controller.dart';
-import 'package:grimorio/screens/components/cover_dialog.dart';
 
 import '../../theme.dart';
 import '../models/personal_book.dart';
@@ -104,6 +103,7 @@ class _FilledHomeState extends State<_FilledHome> {
                           begin: 0,
                           end: widget.listPersonalBook[index].rotation),
                       duration: const Duration(milliseconds: 500),
+                      curve: const SawTooth(50),
                       builder: (context, value, child) {
                         return InkWell(
                           onTapDown: (details) {
@@ -111,15 +111,15 @@ class _FilledHomeState extends State<_FilledHome> {
                               widget.listPersonalBook[index].rotation = 0.1;
                             });
                           },
-                          onLongPress: () {
-                            showCoverDialog(
-                              context: context,
-                              urlImage: widget.listPersonalBook[index]
-                                  .googleBook.thumbnailLink,
-                              title: widget
-                                  .listPersonalBook[index].googleBook.title,
-                            );
-                          },
+                          // onLongPress: () {
+                          //   showCoverDialog(
+                          //     context: context,
+                          //     urlImage: widget.listPersonalBook[index]
+                          //         .googleBook.thumbnailLink,
+                          //     title: widget
+                          //         .listPersonalBook[index].googleBook.title,
+                          //   );
+                          // },
                           onTap: () {
                             Navigator.push(
                               context,
