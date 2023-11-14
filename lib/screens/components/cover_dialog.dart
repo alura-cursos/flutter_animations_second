@@ -11,10 +11,15 @@ showCoverDialog({required BuildContext context, required String urlImage}) {
         child: TweenAnimationBuilder<double>(
           tween: Tween(begin: 0, end: 1),
           duration: const Duration(milliseconds: 500),
-          builder: (context, value, child) {
+          curve: Curves.ease,
+          builder: (BuildContext context, double value, child) {
+            // return Text(
+            //   value.toString(),
+            //   style: const TextStyle(fontSize: 24),
+            // );
             return Image.network(
               urlImage,
-              height: MediaQuery.of(context).size.height * 0.6,
+              height: (MediaQuery.of(context).size.height * 0.6) * value,
               fit: BoxFit.contain,
             );
           },
