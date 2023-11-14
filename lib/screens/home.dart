@@ -7,6 +7,7 @@ import 'package:grimorio/helpers/sine_curve.dart';
 import '../../theme.dart';
 import '../models/personal_book.dart';
 import 'book_details.dart';
+import 'components/cover_dialog.dart';
 import 'components/display_text.dart';
 import 'components/floating_button.dart';
 import 'search_books.dart';
@@ -103,24 +104,29 @@ class _FilledHomeState extends State<_FilledHome> {
                       tween: Tween(
                           begin: 0,
                           end: widget.listPersonalBook[index].rotation),
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 250),
                       curve: const SineCurve(),
+                      onEnd: () {
+                        setState(() {
+                          widget.listPersonalBook[index].rotation = 0;
+                        });
+                      },
                       builder: (context, value, child) {
                         return InkWell(
                           onTapDown: (details) {
                             setState(() {
-                              widget.listPersonalBook[index].rotation = 0.1;
+                              widget.listPersonalBook[index].rotation = 0.05;
                             });
                           },
-                          // onLongPress: () {
-                          //   showCoverDialog(
-                          //     context: context,
-                          //     urlImage: widget.listPersonalBook[index]
-                          //         .googleBook.thumbnailLink,
-                          //     title: widget
-                          //         .listPersonalBook[index].googleBook.title,
-                          //   );
-                          // },
+                          onLongPress: () {
+                            showCoverDialog(
+                              context: context,
+                              urlImage: widget.listPersonalBook[index]
+                                  .googleBook.thumbnailLink,
+                              title: widget
+                                  .listPersonalBook[index].googleBook.title,
+                            );
+                          },
                           onTap: () {
                             Navigator.push(
                               context,
